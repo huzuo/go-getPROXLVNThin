@@ -103,7 +103,7 @@ func getHostLVMArry() []map[string]string {
 	hostLVMArry := make([]map[string]string, 0, 10)
 	for ip, hostname := range ipHostnameMap {
 		// fmt.Println(ip)
-		token, cookie, err := getToken("root", "eBao1234", ip)
+		token, cookie, err := getToken("user", "password", ip)
 		// go getToken()
 		if err != nil {
 			panic(err)
