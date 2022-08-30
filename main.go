@@ -98,6 +98,7 @@ type Datum struct {
 	LV           string `json:"lv"`
 }
 
+//生成数据数组：[{"ip":"xxxx","usage":"xx","free":"xx"},...]
 func getHostLVMArry() []map[string]string {
 	hostLVMArry := make([]map[string]string, 0, 10)
 	for ip, hostname := range ipHostnameMap {
@@ -134,6 +135,7 @@ func getHostLVMArry() []map[string]string {
 	return hostLVMArry
 }
 
+//排序
 func sortUsages(hostLVMArry []map[string]string) []float64 {
 	var usages []float64
 	for _, v := range hostLVMArry {
