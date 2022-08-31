@@ -98,6 +98,16 @@ type Datum struct {
 	LV           string `json:"lv"`
 }
 
+//判断元素是否在切片中
+func InSlice(items []float64, item float64) bool {
+	for _, eachItem := range items {
+		if eachItem == item {
+			return true
+		}
+	}
+	return false
+}
+
 //生成数据数组：[{"ip":"xxxx","usage":"xx","free":"xx"},...]
 func getHostLVMArry() []map[string]string {
 	hostLVMArry := make([]map[string]string, 0, 10)
@@ -140,7 +150,9 @@ func sortUsages(hostLVMArry []map[string]string) []float64 {
 	var usages []float64
 	for _, v := range hostLVMArry {
 		usage_float, _ := strconv.ParseFloat(v["usage"], 64)
-		usages = append(usages, usage_float)
+		if ok := InSlice(usages, usage_float); !ok {
+			usages = append(usages, usage_float)
+		}
 	}
 	sort.Float64s(usages)
 	// fmt.Println(usages)
